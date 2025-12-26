@@ -3,7 +3,7 @@
 
 // #define LIGHT_SENSOR_PIN 1 // Light sensor connected directly to the unit
 #define LIGHT_SENSOR_PIN 8 // GPIO8 for PortABC Port B
-#define LINES            9
+#define LINES            8
 
 static uint32_t lastShutterOpen = 0; // last time the shutter was opened
 static float readings[LINES] = {0};
@@ -22,7 +22,7 @@ void setup() {
   M5.begin();
   M5.Display.setRotation(0);
   M5.Display.setBrightness(128);
-  M5.Display.setTextSize(1.7);
+  M5.Display.setTextSize(1.9);
   M5.Display.setTextColor(WHITE);
 
   pinMode(LIGHT_SENSOR_PIN, INPUT);
@@ -54,8 +54,9 @@ void loop() {
     readings[readIndex] = shutterTime / 1000.0f;
     // Serial.println(readings[readIndex]);
 
+    Serial.printf("%" PRIu32 " us => %.0f ms => ", shutterTime, readings[readIndex]);
     if (readings[readIndex] >= 1000.0f) {
-      Serial.printf("%.3f s\n", readings[readIndex] / 1000.0f);
+      Serial.printf("%.1f s\n", readings[readIndex] / 1000.0f);
     } else {
       Serial.printf("1/%.0f s\n", 1000.0f / readings[readIndex]);
     }
@@ -66,8 +67,8 @@ void loop() {
 
     for (size_t i = (readIndex + 1) % LINES, pos = 1, rounds = 0; rounds < LINES; rounds++, i = (i + 1) % LINES) {
       if (readings[i] > 0) {
-        if (readings[readIndex] >= 1000.0f) {
-          M5.Display.printf("%d. %.3f s\n", pos, readings[i] / 1000.0f);
+        if (readings[i] >= 1000.0f) {
+          M5.Display.printf("%d. %.1f s\n", pos, readings[i] / 1000.0f);
         } else {
           M5.Display.printf("%d. 1/%.0f s\n", pos, 1000.0f / readings[i]);
         }
