@@ -8,7 +8,7 @@
 // #define LIGHT_SENSOR_PIN 1 // Light sensor connected directly to the unit
 #define LIGHT_SENSOR_PIN 8 // GPIO8 for PortABC Port B
 #define LINES            8
-#define THRESHOLD        500
+#define THRESHOLD        300
 
 static uint32_t lastShutterOpen = 0; // last time the shutter was opened
 static float readings[LINES] = {0};
