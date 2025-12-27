@@ -7,12 +7,55 @@
 
 // #define LIGHT_SENSOR_PIN 1 // Light sensor connected directly to the unit
 #define LIGHT_SENSOR_PIN 8 // GPIO8 for PortABC Port B
-#define LINES            8
-#define THRESHOLD        1500
+#define LINES            7
 
-static uint32_t lastShutterOpen = 0; // last time the shutter was opened
-static float readings[LINES] = {0};
-static size_t readIndex = 0;
+// Calibration notes:
+// - Used Boling BL-P1 light at 8500K with diffuser close to camera lense or lens mont
+// - leaf shutter calibrated with a Canon EOS 3000
+// - focal-plane shutter calibrated with a Rollei 35S
+#define THRESHOLD_LEAF        225
+#define THRESHOLD_FOCAL_PLANE 800
+
+enum class ShutterMode {
+  Leaf,
+  FocalPlane
+};
+
+struct Reading {
+    uint32_t shutterOpenTime = 0;
+    uint32_t shutterDuration = 0;
+};
+
+static Reading reading = {0, 0};
+static Reading history[LINES] = {};
+static size_t historyIndex = 0;
+
+static ShutterMode currentMode = ShutterMode::Leaf;
+static int threshold = currentMode == ShutterMode::Leaf ? THRESHOLD_LEAF : THRESHOLD_FOCAL_PLANE;
+
+static void reset() {
+  for (size_t i = 0; i < LINES; i++) {
+    history[i] = {0};
+  }
+  historyIndex = 0;
+
+  reading = {0, 0};
+
+  M5.Display.clear();
+  M5.Display.setCursor(0, 8);
+  M5.Display.println(currentMode == ShutterMode::Leaf ? "Leaf" : "Focal-plane");
+
+  Serial.println("Shutter Speed Tester Ready");
+  Serial.println("Shutter Mode: " + String(currentMode == ShutterMode::Leaf ? "Leaf" : "Focal-plane"));
+}
+
+static void switchMode() {
+  currentMode = currentMode == ShutterMode::Leaf ? ShutterMode::FocalPlane : ShutterMode::Leaf;
+  threshold = currentMode == ShutterMode::Leaf ? THRESHOLD_LEAF : THRESHOLD_FOCAL_PLANE;
+  Serial.printf("Switched to %s shutter mode (threshold=%d)\n", currentMode == ShutterMode::Leaf ? "Leaf" : "Focal-plane", threshold);
+
+  reset();
+}
 
 void setup() {
   Serial.begin(115200);
@@ -32,75 +75,70 @@ void setup() {
 
   pinMode(LIGHT_SENSOR_PIN, INPUT);
   analogSetAttenuation(ADC_11db);
+
+  reset();
 }
 
 void loop() {
-  const int raw = analogRead(LIGHT_SENSOR_PIN);
-#if DEBUG
-  Serial.printf("raw:%d\n", raw);
-#endif
+  M5.update();
 
-  if (lastShutterOpen == 0 && raw < THRESHOLD) {
+  if (M5.BtnA.wasSingleClicked()) {
+    reset();
+  }
+
+  if (M5.BtnA.wasDoubleClicked()) {
+    switchMode();
+  }
+
+  const int raw = analogRead(LIGHT_SENSOR_PIN);
+
+  // print only relevant values
+  // if (raw <= 3500)
+  //   Serial.printf("raw:%d\n", raw);
+
+  if (reading.shutterOpenTime == 0 && raw < threshold) {
     // shutter is opening: start recording time
-    lastShutterOpen = micros();
+    reading.shutterOpenTime = micros();
     return;
   }
 
-  if (lastShutterOpen && raw > THRESHOLD) {
-    // shutter is closing: calculate elapsed time
-    uint32_t shutterTime = micros() - lastShutterOpen;
-    lastShutterOpen = 0;
+  if (reading.shutterDuration == 0 && reading.shutterOpenTime > 0 && raw > threshold) {
+    reading.shutterDuration = micros() - reading.shutterOpenTime;
+    return;
+  }
 
-    if (shutterTime < 1500) {
-      // ignore very short times (if shutter opens slowly then ESP32 can read different values around 2000)
-      return;
-    }
+  if (reading.shutterDuration) {
+    history[historyIndex] = reading;
 
-    readings[readIndex] = shutterTime / 1000.0f;
-    // Serial.println(readings[readIndex]);
-
-    Serial.printf("%d raw => %" PRIu32 " us => %.0f ms => ", raw, shutterTime, readings[readIndex]);
-    if (readings[readIndex] >= 1000.0f) {
-      Serial.printf("%.1f s\n", readings[readIndex] / 1000.0f);
+    Serial.printf("Shutter: %" PRIu32 " us => %.0f ms => ", reading.shutterDuration, reading.shutterDuration / 1000.0f);
+    if (history[historyIndex].shutterDuration >= 1000000) {
+      Serial.printf("%.1f s\n", history[historyIndex].shutterDuration / 1000000.0f);
     } else {
-      Serial.printf("1/%.0f s\n", 1000.0f / readings[readIndex]);
+      Serial.printf("1/%.0f s\n", 1000000.0f / history[historyIndex].shutterDuration);
     }
+    Serial.println("----");
 
     M5.update();
     M5.Display.clear();
     M5.Display.setCursor(0, 8);
 
-    for (size_t i = (readIndex + 1) % LINES, pos = 1, rounds = 0; rounds < LINES; rounds++, i = (i + 1) % LINES) {
-      if (readings[i] > 0) {
-        if (readings[i] >= 1000.0f) {
-          M5.Display.printf("%d. %.1f s\n", pos, readings[i] / 1000.0f);
+    M5.Display.println(currentMode == ShutterMode::Leaf ? "Leaf" : "Focal-plane");
+    for (size_t i = (historyIndex + 1) % LINES, pos = 1, rounds = 0; rounds < LINES; rounds++, i = (i + 1) % LINES) {
+      if (history[i].shutterDuration > 0) {
+        if (history[i].shutterDuration >= 1000000) {
+          M5.Display.printf("%d. %.1f s\n", pos, history[i].shutterDuration / 1000000.0f);
         } else {
-          M5.Display.printf("%d. 1/%.0f s\n", pos, 1000.0f / readings[i]);
+          M5.Display.printf("%d. 1/%.0f s\n", pos, 1000000.0f / history[i].shutterDuration);
         }
         pos++;
       }
     }
 
-    readIndex++;
-    if (readIndex >= LINES) {
-      readIndex = 0;
-    }
-
-    return;
-  }
-
-  if (!lastShutterOpen) {
-    M5.update();
-    if (M5.BtnA.wasPressed()) {
-      for (size_t i = 0; i < LINES; i++) {
-        readings[i] = 0;
-      }
-      readIndex = 0;
-      M5.Display.clear();
+    // prepare mext entry
+    reading = {0, 0};
+    historyIndex++;
+    if (historyIndex >= LINES) {
+      historyIndex = 0;
     }
   }
-
-#if DEBUG
-  delay(100);
-#endif
 }
