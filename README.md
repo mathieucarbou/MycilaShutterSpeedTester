@@ -21,6 +21,10 @@ Perfect for:
 - Diagnosing shutter timing issues
 - Calibrating camera shutters
 
+**YouTube video to demonstrate the device in action:**
+
+[![Demo Video](https://img.youtube.com/vi/zdbVBdeM9WQ/0.jpg)](https://youtu.be/zdbVBdeM9WQ)
+
 ## Table of Contents
 
 - � [Description](#description)
@@ -141,7 +145,7 @@ Press the **button A** on the ATOMS3 to clear all measurements and reset the dis
 
 ### Tips for Accurate Measurements
 
-- Ensure good lighting conditions or point the camera at a bright light source
+- Ensure good lighting conditions or point the camera at a bright light source. **I tested with a Boling BL-P1 LED video light.**
 - Position the sensor as close as possible to the lens
 - For very fast shutter speeds (>1/1000s), ensure the light source is very bright
 - The device filters out measurements shorter than 1.5ms to avoid false readings
