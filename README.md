@@ -14,6 +14,13 @@ ESP32 firmware to measure camera shutter speeds
 
 This is an ESP32-based device designed to accurately measure camera shutter speeds. It uses a light sensor to detect when the shutter opens and closes, calculating the exact duration with microsecond precision. The device displays the last 8 measurements on its screen and outputs detailed readings via serial console.
 
+The device supports two shutter types with optimized detection thresholds:
+
+- **Leaf shutters** (e.g., Rollei 35S)
+- **Focal-plane shutters** (e.g., Canon EOS 3000)
+
+Switch between modes by double-clicking the button.
+
 Perfect for:
 
 - Testing and verifying mechanical shutter speeds
@@ -111,6 +118,10 @@ The wiring is straightforward using the M5Stack ecosystem:
 1. Position the light sensor directly in front of your camera lens
 2. Ensure the sensor is close enough to detect light changes when the shutter opens
 3. The device should be powered on and displaying the main screen
+4. Select the appropriate shutter mode:
+   - **Leaf shutter mode** for cameras with leaf shutters
+   - **Focal-plane mode** for cameras with focal-plane shutters
+   - Double-click button A to switch between modes
 
 ### Taking Measurements
 
@@ -124,7 +135,8 @@ The wiring is straightforward using the M5Stack ecosystem:
 
 ### Display Information
 
-- The screen shows up to 8 most recent measurements
+- The top line shows the current shutter mode (`Leaf` or `Focal-plane`)
+- The screen shows up to 7 most recent measurements
 - Measurements are displayed in standard shutter speed notation:
   - Fast speeds: `1/250 s`, `1/500 s`, `1/1000 s`, etc.
   - Slow speeds: `1.0 s`, `2.5 s`, etc.
@@ -139,9 +151,11 @@ Connect to the serial console (115200 baud) for detailed information:
 125000 us => 125 ms => 1/8 s
 ```
 
-### Clearing Measurements
+- **Single-click button A**: Clear all measurements and reset the display
+- **Double-click button A**: Switch between Leaf and Focal-plane shutter modes
+  Press the **button A** on the ATOMS3 to clear all measurements and reset the display.
 
-Press the **button A** on the ATOMS3 to clear all measurements and reset the display.
+[![](https://mathieu.carbou.me/MycilaShutterSpeedTester/mode.gif)](https://mathieu.carbou.me/MycilaShutterSpeedTester/mode.gif)
 
 ### Tips for Accurate Measurements
 

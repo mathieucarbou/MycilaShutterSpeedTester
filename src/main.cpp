@@ -11,10 +11,10 @@
 
 // Calibration notes:
 // - Used Boling BL-P1 light at 8500K with diffuser close to camera lense or lens mont
-// - leaf shutter calibrated with a Canon EOS 3000
-// - focal-plane shutter calibrated with a Rollei 35S
-#define THRESHOLD_LEAF        225
-#define THRESHOLD_FOCAL_PLANE 800
+// - leaf shutter calibrated with a Rollei 35S
+// - focal-plane shutter calibrated with a Canon EOS 3000
+#define THRESHOLD_LEAF        800
+#define THRESHOLD_FOCAL_PLANE 225
 
 enum class ShutterMode {
   Leaf,
