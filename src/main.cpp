@@ -58,7 +58,7 @@ void loop() {
     readings[readIndex] = shutterTime / 1000.0f;
     // Serial.println(readings[readIndex]);
 
-    Serial.printf("%" PRIu32 " us => %.0f ms => ", shutterTime, readings[readIndex]);
+    Serial.printf("%d raw => %" PRIu32 " us => %.0f ms => ", raw, shutterTime, readings[readIndex]);
     if (readings[readIndex] >= 1000.0f) {
       Serial.printf("%.1f s\n", readings[readIndex] / 1000.0f);
     } else {
