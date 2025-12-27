@@ -8,6 +8,7 @@
 // #define LIGHT_SENSOR_PIN 1 // Light sensor connected directly to the unit
 #define LIGHT_SENSOR_PIN 8 // GPIO8 for PortABC Port B
 #define LINES            8
+#define THRESHOLD        500
 
 static uint32_t lastShutterOpen = 0; // last time the shutter was opened
 static float readings[LINES] = {0};
@@ -39,13 +40,13 @@ void loop() {
   Serial.printf("raw:%d\n", raw);
 #endif
 
-  if (lastShutterOpen == 0 && raw < 2000) {
+  if (lastShutterOpen == 0 && raw < THRESHOLD) {
     // shutter is opening: start recording time
     lastShutterOpen = micros();
     return;
   }
 
-  if (lastShutterOpen && raw > 2000) {
+  if (lastShutterOpen && raw > THRESHOLD) {
     // shutter is closing: calculate elapsed time
     uint32_t shutterTime = micros() - lastShutterOpen;
     lastShutterOpen = 0;
