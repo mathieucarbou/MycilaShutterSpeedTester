@@ -155,6 +155,8 @@ Connect to the serial console (115200 baud) for detailed information:
 - **Double-click button A**: Switch between Leaf and Focal-plane shutter modes
   Press the **button A** on the ATOMS3 to clear all measurements and reset the display.
 
+[![](https://mathieu.carbou.me/MycilaShutterSpeedTester/mode.gif)](https://mathieu.carbou.me/MycilaShutterSpeedTester/mode.gif)
+
 ### Tips for Accurate Measurements
 
 - Ensure good lighting conditions or point the camera at a bright light source. **I tested with a Boling BL-P1 LED video light.**
