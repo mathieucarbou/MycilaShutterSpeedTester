@@ -159,7 +159,7 @@ Connect to the serial console (115200 baud) for detailed information:
 
 ### Tips for Accurate Measurements
 
-- Ensure good lighting conditions or point the camera at a bright light source. **I tested with a Boling BL-P1 LED video light.**
+- Ensure good lighting conditions or point the camera at a bright light source. **I tested with a Boling BL-P1 light at 8500K without diffuser close to camera lens or lens mount.**
 - Position the sensor as close as possible to the lens
 - For very fast shutter speeds (>1/1000s), ensure the light source is very bright
 - The device filters out measurements shorter than 1.5ms to avoid false readings

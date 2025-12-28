@@ -10,7 +10,7 @@
 #define LINES            7
 
 // Calibration notes:
-// - Used Boling BL-P1 light at 8500K with diffuser close to camera lense or lens mont
+// - Used Boling BL-P1 light at 8500K without diffuser close to camera lens or lens mount
 // - leaf shutter calibrated with a Rollei 35S
 // - focal-plane shutter calibrated with a Canon EOS 3000
 #define THRESHOLD_LEAF        800
