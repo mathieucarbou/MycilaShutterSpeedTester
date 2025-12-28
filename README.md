@@ -2,7 +2,7 @@
 
 ESP32 firmware to measure camera shutter speeds
 
-[![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo.jpg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo.jpg)
+| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo1.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo1.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo2.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo2.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo3.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo3.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo4.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo4.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo5.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo5.jpeg) |
 
 [![Latest Release](https://img.shields.io/github/release/mathieucarbou/MycilaShutterSpeedTester.svg)](https://GitHub.com/mathieucarbou/MycilaShutterSpeedTester/releases/)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.txt)
@@ -151,11 +151,63 @@ Connect to the serial console (115200 baud) for detailed information:
 125000 us => 125 ms => 1/8 s
 ```
 
-- **Single-click button A**: Clear all measurements and reset the display
-- **Double-click button A**: Switch between Leaf and Focal-plane shutter modes
-  Press the **button A** on the ATOMS3 to clear all measurements and reset the display.
+### Button Controls
 
-[![](https://mathieu.carbou.me/MycilaShutterSpeedTester/mode.gif)](https://mathieu.carbou.me/MycilaShutterSpeedTester/mode.gif)
+- **Single-click button A**:
+  - In measurement mode: Clear all measurements and reset the display
+  - In calibration mode: Reset threshold to default value
+- **Double-click button A**: Cycle through modes:
+  1. Leaf shutter measurement
+  2. Focal-plane shutter measurement
+  3. Leaf shutter calibration
+  4. Focal-plane shutter calibration
+- **Hold button A**: In calibration mode, increment the detection threshold
+
+| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo2.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo2.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo3.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo3.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo4.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo4.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo5.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo5.jpeg) |
+
+### Calibration Modes
+
+The device includes calibration modes for both shutter types to fine-tune the light detection threshold. Different cameras and lighting conditions may require different sensitivity levels.
+
+**When to calibrate:**
+
+- The device fails to detect shutter openings/closings
+- You get inconsistent or erratic readings
+- You're using different lighting conditions than the default calibration
+
+**How to calibrate:**
+
+1. **Enter calibration mode**:
+
+   - Double-click button A to cycle to either "LEAF SHUTTER Calibration" or "FOCAL-PLANE Calibration" mode
+   - The screen will show the current threshold value and real-time light sensor readings
+
+2. **Adjust the threshold**:
+
+   - Point the light sensor at your light source (same setup as for measurements)
+   - Observe the raw sensor value displayed on screen
+   - Hold button A to increment the threshold (cycles from 0 to 4075 in steps of 25)
+   - The sensor reading will be colored:
+     - **Yellow**: Sensor value is above threshold (light detected)
+     - **Red**: Sensor value is below threshold (no light detected)
+
+3. **Find the optimal threshold**:
+
+   - With the shutter open (sensor pointing at light), the reading should be **yellow** (above threshold)
+   - Trigger the shutter and observe if readings drop to **red** when closed
+   - Adjust the threshold so it reliably distinguishes between open and closed states
+   - The threshold is automatically saved to device memory
+
+4. **Reset to defaults**:
+   - Single-click button A in calibration mode to restore factory defaults:
+     - Leaf shutter: 3300
+     - Focal-plane shutter: 3875
+
+**Default calibration notes:**
+
+- Calibrated using a Boling BL-P1 light at 8500K without diffuser, positioned close to the camera lens or lens mount
+- Leaf shutter: tested with Rollei 35S
+- Focal-plane shutter: tested with Canon EOS 3000
 
 ### Tips for Accurate Measurements
 
