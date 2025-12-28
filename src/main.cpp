@@ -13,7 +13,7 @@
 #define HISTORY_SIZE 6
 
 // Calibration notes:
-// - Used Boling BL-P1 light at 8500K without diffuser close to camera lens or lens mount
+// - Used Boling BL-P1 light at 8500K at 100% with diffuser close to camera lens or lens mount
 // - leaf shutter calibrated with a Rollei 35S
 // - focal-plane shutter calibrated with a Canon EOS 3000
 #define DEFAULT_THRESHOLD_LEAF        3300

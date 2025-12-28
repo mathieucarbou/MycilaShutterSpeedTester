@@ -205,13 +205,13 @@ The device includes calibration modes for both shutter types to fine-tune the li
 
 **Default calibration notes:**
 
-- Calibrated using a Boling BL-P1 light at 8500K without diffuser, positioned close to the camera lens or lens mount
+- Calibrated using a Boling BL-P1 light at 8500K at 100% with diffuser, positioned close to the camera lens or lens mount
 - Leaf shutter: tested with Rollei 35S
 - Focal-plane shutter: tested with Canon EOS 3000
 
 ### Tips for Accurate Measurements
 
-- Ensure good lighting conditions or point the camera at a bright light source. **I tested with a Boling BL-P1 light at 8500K without diffuser close to camera lens or lens mount.**
+- Ensure good lighting conditions or point the camera at a bright light source. **I tested with a Boling BL-P1 light at 8500K at 100% with diffuser close to camera lens or lens mount.**
 - Position the sensor as close as possible to the lens
 - For very fast shutter speeds (>1/1000s), ensure the light source is very bright
 - The device filters out measurements shorter than 1.5ms to avoid false readings
