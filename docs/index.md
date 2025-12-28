@@ -2,7 +2,7 @@
 
 ESP32 firmware to measure camera shutter speeds
 
-| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo1.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo1.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo2.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo2.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo3.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo3.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo4.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo4.jpeg) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo5.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo5.jpeg) |
+[![](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo1.jpeg)](https://mathieu.carbou.me/MycilaShutterSpeedTester/demo1.jpeg)
 
 [![Latest Release](https://img.shields.io/github/release/mathieucarbou/MycilaShutterSpeedTester.svg)](https://GitHub.com/mathieucarbou/MycilaShutterSpeedTester/releases/)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.txt)
