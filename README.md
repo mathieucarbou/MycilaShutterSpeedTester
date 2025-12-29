@@ -216,6 +216,17 @@ The device includes calibration modes for both shutter types to fine-tune the li
 - For very fast shutter speeds (>1/1000s), ensure the light source is very bright
 - The device filters out measurements shorter than 1.5ms to avoid false readings
 
+### Development Tips
+
+If you activate the `DEBUG` mode in the source code, the device will output raw sensor readings to the serial console.
+This can help you fine-tune the detection threshold during calibration.
+
+You can use the Vscode Serial Plotter extension to visualize the sensor readings in real-time.
+
+Example with Canon EOS 3000 at 1/500s, 1/250s, 1/125s and 1/60s shutter speeds:
+
+| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png) |
+
 ## License
 
 This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
