@@ -218,10 +218,15 @@ This can help you fine-tune the detection threshold during calibration.
 
 You can use the Vscode Serial Plotter extension to visualize the sensor readings in real-time.
 
-Example with Canon EOS 3000 at 1/500s, 1/250s, 1/125s and 1/60s shutter speeds:
+**Example with Canon EOS 3000 at 1/500s, 1/250s, 1/125s and 1/60s shutter speeds:**
 
 | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png) |
 | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png) |
+
+**Example with Rollei 35S at 1/500s, 1/250s, 1/125s and 1/60s shutter speeds:**
+
+| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_500.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_500.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_250.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_250.png) |
+| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_125.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_125.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_60.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-rollei-35s-1_60.png) |
 
 ## License
 
