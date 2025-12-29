@@ -6,7 +6,7 @@
 #include <M5Unified.h>
 #include <Preferences.h>
 
-#define DEBUG 1
+// #define DEBUG 1
 
 // #define LIGHT_SENSOR_PIN 1 // Light sensor connected directly to the unit
 #define LIGHT_SENSOR_PIN 8 // GPIO8 for PortABC Port B
@@ -18,7 +18,7 @@
 // - Used Boling BL-P1 light at 8500K at 100% with diffuser close to camera lens or lens mount
 // - leaf shutter calibrated with a Rollei 35S
 // - focal-plane shutter calibrated with a Canon EOS 3000
-#define DEFAULT_THRESHOLD_LEAF        3300
+#define DEFAULT_THRESHOLD_LEAF        3200
 #define DEFAULT_THRESHOLD_FOCAL_PLANE 3800
 
 // we consider that there is no light when the raw value is below this threshold
