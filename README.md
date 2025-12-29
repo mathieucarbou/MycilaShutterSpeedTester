@@ -10,6 +10,22 @@ ESP32 firmware to measure camera shutter speeds
 [![Build](https://github.com/mathieucarbou/MycilaShutterSpeedTester/actions/workflows/ci.yml/badge.svg)](https://github.com/mathieucarbou/MycilaShutterSpeedTester/actions/workflows/ci.yml)
 [![GitHub latest commit](https://badgen.net/github/last-commit/mathieucarbou/MycilaShutterSpeedTester)](https://GitHub.com/mathieucarbou/MycilaShutterSpeedTester/commit/)
 
+- [Description](#description)
+- [Hardware Requirements](#hardware-requirements)
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Flashing the Firmware](#flashing-the-firmware)
+- [Wiring](#wiring)
+- [Usage](#usage)
+  - [Setup](#setup)
+  - [Taking Measurements](#taking-measurements)
+  - [Display Information](#display-information)
+  - [Button Controls](#button-controls)
+  - [Calibration Modes](#calibration-modes)
+  - [Tips for Accurate Measurements](#tips-for-accurate-measurements)
+- [Development Tips](#development-tips)
+- [License](#license)
+
 ## Description
 
 This is an ESP32-based device designed to accurately measure camera shutter speeds. It uses a light sensor to detect when the shutter opens and closes, calculating the exact duration with microsecond precision. The device displays the last 8 measurements on its screen and outputs detailed readings via serial console.
@@ -31,15 +47,6 @@ Perfect for:
 **YouTube video to demonstrate the device in action:**
 
 [![Demo Video](https://img.youtube.com/vi/zdbVBdeM9WQ/0.jpg)](https://youtu.be/zdbVBdeM9WQ)
-
-## Table of Contents
-
-- � [Description](#description)
-- 🛠️ [Hardware Requirements](#hardware-requirements)
-- ⚙️ [Installation](#installation)
-- 🔌 [Wiring](#wiring)
-- 👀 [Usage](#usage)
-- 📝 [License](#license)
 
 ## Hardware Requirements
 
@@ -204,7 +211,7 @@ The device includes calibration modes for both shutter types to fine-tune the li
 - For very fast shutter speeds (>1/1000s), ensure the light source is very bright
 - The device filters out measurements shorter than 1.5ms to avoid false readings
 
-### Development Tips
+## Development Tips
 
 If you activate the `DEBUG` mode in the source code, the device will output raw sensor readings to the serial console.
 This can help you fine-tune the detection threshold during calibration.
