@@ -141,16 +141,6 @@ The wiring is straightforward using the M5Stack ecosystem:
   - Fast speeds: `1/250 s`, `1/500 s`, `1/1000 s`, etc.
   - Slow speeds: `1.0 s`, `2.5 s`, etc.
 
-### Serial Console
-
-Connect to the serial console (115200 baud) for detailed information:
-
-```
-500000 us => 500 ms => 1/2 s
-250000 us => 250 ms => 1/4 s
-125000 us => 125 ms => 1/8 s
-```
-
 ### Button Controls
 
 - **Single-click button A**:
@@ -199,9 +189,7 @@ The device includes calibration modes for both shutter types to fine-tune the li
    - The threshold is automatically saved to device memory
 
 4. **Reset to defaults**:
-   - Single-click button A in calibration mode to restore factory defaults:
-     - Leaf shutter: 3300
-     - Focal-plane shutter: 3875
+   - Single-click button A in calibration mode to restore factory defaults
 
 **Default calibration notes:**
 
@@ -225,7 +213,8 @@ You can use the Vscode Serial Plotter extension to visualize the sensor readings
 
 Example with Canon EOS 3000 at 1/500s, 1/250s, 1/125s and 1/60s shutter speeds:
 
-| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png) |
+| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_500.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_250.png) |
+| [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_125.png) | [![](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png)](https://mathieu.carbou.me/MycilaShutterSpeedTester/debug-serial-plotter-canon-eos-3000-1_60.png) |
 
 ## License
 
