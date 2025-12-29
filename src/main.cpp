@@ -276,19 +276,6 @@ void loop() {
     return;
   }
 
-  // if (M5.BtnA.isPressed()) {
-  //   Serial.println("pressed detected");
-  //   switch (state) {
-  //     case State::LEAF_CALIBRATION:
-  //     case State::FOCAL_PLANE_CALIBRATION:
-  //       increaseThreshold = !increaseThreshold;
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   // return;
-  // }
-
   if (M5.BtnA.isHolding()) {
     switch (state) {
       case State::LEAF_CALIBRATION:
