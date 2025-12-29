@@ -6,6 +6,8 @@
 #include <M5Unified.h>
 #include <Preferences.h>
 
+#define DEBUG 1
+
 // #define LIGHT_SENSOR_PIN 1 // Light sensor connected directly to the unit
 #define LIGHT_SENSOR_PIN 8 // GPIO8 for PortABC Port B
 
@@ -17,7 +19,10 @@
 // - leaf shutter calibrated with a Rollei 35S
 // - focal-plane shutter calibrated with a Canon EOS 3000
 #define DEFAULT_THRESHOLD_LEAF        3300
-#define DEFAULT_THRESHOLD_FOCAL_PLANE 3875
+#define DEFAULT_THRESHOLD_FOCAL_PLANE 3800
+
+// we consider that there is no light when the raw value is below this threshold
+#define DEFAULT_THRESHOLD_DARK 500
 
 enum class State : uint8_t {
   LEAF_MEASUREMENT = 0,
@@ -40,7 +45,12 @@ static Reading reading = {0, 0};
 
 static uint16_t threshold;
 static State state;
-static uint32_t lastDisplayUpdate = 0;
+static uint32_t lastDisplayUpdate;
+
+static uint16_t read() {
+  const uint16_t raw = 4095 - analogRead(LIGHT_SENSOR_PIN);
+  return raw >= DEFAULT_THRESHOLD_DARK ? raw : 0;
+}
 
 static void displayHistory() {
   if (reading.shutterDuration > 0) {
@@ -79,13 +89,21 @@ static void displayHistory() {
 }
 
 static void displayRawValue() {
-  if (millis() - lastDisplayUpdate < 200) {
-    return;
+  const uint16_t raw = read();
+
+#ifdef DEBUG
+  if (raw >= DEFAULT_THRESHOLD_DARK) {
+    Serial.print(">raw:");
+    Serial.print(raw);
+    Serial.print("\r\n");
   }
 
-  const uint16_t raw = 4095 - analogRead(LIGHT_SENSOR_PIN);
+#else
+  if (lastDisplayUpdate && millis() - lastDisplayUpdate < 200)
+    return;
 
-  Serial.printf("%c %d\n", raw >= threshold ? '>' : '<', raw);
+  if (raw)
+    Serial.printf("%c %d\n", raw >= threshold ? '>' : '<', raw);
 
   M5.Display.clear();
   M5.Display.setCursor(0, 8);
@@ -105,6 +123,7 @@ static void displayRawValue() {
   M5.Display.println(raw);
 
   lastDisplayUpdate = millis();
+#endif
 }
 
 static void updateThreshold() {
@@ -162,7 +181,7 @@ static void resetHistory() {
 
 static void doShutterMeasurement() {
   // analogRead() on ESP32 (which M5Stack devices use) returns a value between 0 and 4095 by default.
-  const uint16_t raw = 4095 - analogRead(LIGHT_SENSOR_PIN);
+  const uint16_t raw = read();
 
   if (reading.shutterOpenTime == 0 && raw >= threshold) {
     // shutter is opening: start recording time
@@ -191,6 +210,7 @@ static void doShutterMeasurement() {
 static void switchState(State newState) {
   state = newState;
   reading = {0, 0};
+  lastDisplayUpdate = 0;
   preferences.putUChar("mode", static_cast<uint8_t>(state));
 
   switch (state) {
