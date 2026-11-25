@@ -21,13 +21,13 @@ jobs:
         board: ["m5stack-atoms3"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Get Tags
         run: git fetch --force --tags origin
 
       - name: Cache PlatformIO
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           key: ${{ runner.os }}-pio
           path: |
@@ -35,7 +35,7 @@ jobs:
             ~/.platformio
 
       - name: Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
 
@@ -67,7 +67,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download
         uses: actions/download-artifact@v8
@@ -94,7 +94,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Download
         uses: actions/download-artifact@v8
